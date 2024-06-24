@@ -95,8 +95,19 @@ namespace BG3UnPAKer
                 // Build the full path of the selected file
                 string fullPath = GetFullPath(selectedNode);
 
+                // Temporarily disable the TreeView
+                treeView1.Enabled = false;
+
                 // Extract the selected file
                 mainForm.ExtractSpecificFile(fullPath);
+
+                // Re-enable the TreeView
+                treeView1.Enabled = true;
+
+                // Re-select the node after extraction
+                treeView1.SelectedNode = selectedNode;
+                selectedNode.EnsureVisible();
+                treeView1.Focus();
             }
             else
             {
