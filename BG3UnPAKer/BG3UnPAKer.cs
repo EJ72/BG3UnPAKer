@@ -131,14 +131,26 @@ namespace BG3UnPAKer
 
         private void ListBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
+            int index = ArchiveListBox.IndexFromPoint(e.Location);
+            if (index != ListBox.NoMatches)
             {
-                int index = ArchiveListBox.IndexFromPoint(e.Location);
-                if (index != ListBox.NoMatches)
+                Rectangle itemRect = ArchiveListBox.GetItemRectangle(index);
+                if (itemRect.Contains(e.Location))
                 {
                     ArchiveListBox.SelectedIndex = index;
-                    contextMenu.Show(ArchiveListBox, e.Location);
+                    if (e.Button == MouseButtons.Right)
+                    {
+                        contextMenu.Show(ArchiveListBox, e.Location);
+                    }
                 }
+                else
+                {
+                    ArchiveListBox.ClearSelected();
+                }
+            }
+            else
+            {
+                ArchiveListBox.ClearSelected();
             }
         }
 
@@ -203,12 +215,10 @@ namespace BG3UnPAKer
 
         private void ListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string curItem = ArchiveListBox.SelectedItem?.ToString();
-            _ = ArchiveListBox.FindString(curItem);
             if (ArchiveListBox.SelectedItem != null)
             {
+                string curItem = ArchiveListBox.SelectedItem.ToString();
                 UnpackButton.Enabled = true;
-                Debug.WriteLine(curItem + " ready to extract?");
                 LogMessage(curItem + " ready to extract?");
             }
             else
