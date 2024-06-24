@@ -29,7 +29,7 @@ BG3UnPAKer is a Windows Forms application designed to browse and extract files f
 3. The application will list the archive files in the selected folder. Select an archive from the list to load its contents.
 
 #### Browsing Files
-- The contents of the selected archive will be displayed in a tree view. Expand the nodes to navigate through the directories and files.
+- Right-Click on an archive and the contents of the selected archive will be displayed in a tree view. Expand the nodes to navigate through the directories and files.
 
 #### Extracting Files
 1. Select a file in the tree view.
